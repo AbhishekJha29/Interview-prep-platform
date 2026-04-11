@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import {useParams} from "react-router-dom";
+import {useParams, useNavigate} from "react-router-dom";
 import moment from "moment";
 import {AnimatePresence, motion} from "framer-motion";
-import { LuCircleAlert, LuListCollapse} from "react-icons/lu";
+import { LuCircleAlert, LuListCollapse, LuArrowLeft} from "react-icons/lu";
 import SpinnerLoader from "../../components/Loader/SpinnerLoader";
 import {toast} from "react-hot-toast";
 import RoleInfoHeader from './components/RoleInfoHeader';
@@ -17,6 +17,8 @@ import SkeletonLoader from '../../components/Loader/SkeletonLoader';
 
 const InterviewPrep = () => {
   const {sessionId} = useParams();
+  const navigate = useNavigate();
+
   const [ sessionData, setSessionData] = useState(null);
   const [errorMsg, setErrorMsg]  = useState("");
   const [openLeanMoreDrawer, setOpenLeanMoreDrawer] = useState(false);
@@ -124,7 +126,19 @@ const InterviewPrep = () => {
   }, []);
 
   return (
-    <DashboardLayout>
+    <DashboardLayout activeMenu="dashboard">
+      <div className='bg-white'>
+        <div className='container mx-auto py-2 px-4 md:px-0'>
+          <button
+            onClick={() => navigate("/dashboard")}
+            className='flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors mb-2 cursor-pointer'
+          >
+            <LuArrowLeft className='text-lg' />
+            Back to Dashboard
+          </button>
+        </div>
+      </div>
+
       <RoleInfoHeader
         role={sessionData?.role || ""}
         topicsToFocus={sessionData?.topicsToFocus || ""}
