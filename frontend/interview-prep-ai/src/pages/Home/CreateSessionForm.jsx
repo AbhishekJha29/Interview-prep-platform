@@ -56,7 +56,7 @@ const CreateSessionForm = () => {
             });
 
             // 3. Navigate to new session page
-            navigate(`/interview-prep/${response.data._id}`);
+            navigate(`/interview-prep/${response.data.session._id}`);
 
         } catch (error) {
             if (error.response?.data?.message) {
